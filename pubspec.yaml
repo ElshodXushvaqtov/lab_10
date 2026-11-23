@@ -9,10 +9,10 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  tflite_flutter: ^0.12.1   # TensorFlow Lite interpreter
-  image_picker: ^1.2.3      # camera and gallery
-  image: ^4.9.1             # decode, crop and resize in pure Dart
-  http: ^1.5.0              # download an image from a URL
+  tflite_flutter: ^0.12.1
+  image_picker: ^1.2.3
+  image: ^4.9.1
+  http: ^1.5.0
 
 dev_dependencies:
   flutter_test:

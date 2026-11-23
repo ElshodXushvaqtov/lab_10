@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../services/history_entry.dart';
 import '../theme/app_theme.dart';
 
-/// Screen 4. Every classification of this session, newest first.
 class HistoryScreen extends StatelessWidget {
   const HistoryScreen({super.key, required this.history, required this.onOpen});
 
@@ -14,7 +13,6 @@ class HistoryScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Designed empty state
     if (history.isEmpty) {
       return Center(
         child: Padding(
@@ -50,10 +48,11 @@ class HistoryScreen extends StatelessWidget {
         return Card(
           clipBehavior: Clip.antiAlias,
           child: ListTile(
-            onTap: () => onOpen(entry), // reopens Result, no new inference
+            onTap: () => onOpen(entry),
             leading: ClipRRect(
               borderRadius: BorderRadius.circular(8),
-              child: Image.memory(entry.bytes, width: 52, height: 52, fit: BoxFit.cover),
+              child: Image.memory(entry.bytes,
+                  width: 52, height: 52, fit: BoxFit.cover),
             ),
             title: Text(entry.top.label),
             subtitle: Text('$percent %'),

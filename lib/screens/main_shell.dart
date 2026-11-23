@@ -10,9 +10,6 @@ import 'home_screen.dart';
 import 'model_screen.dart';
 import 'result_screen.dart';
 
-/// Holds the bottom navigation (Home, History, Model) and the history list.
-/// All three image sources end in handleImage(), so classification code
-/// exists only once.
 class MainShell extends StatefulWidget {
   const MainShell({super.key, required this.classifier});
 
@@ -24,16 +21,13 @@ class MainShell extends StatefulWidget {
 
 class _MainShellState extends State<MainShell> {
   final _sources = ImageSources();
-  final List<HistoryEntry> _history = []; // newest first
+  final List<HistoryEntry> _history = [];
   int _tab = 0;
 
-  // ---------------- The single path: bytes -> classify -> Result -> History
-
   Future<void> handleImage(Uint8List? bytes, String source) async {
-    if (bytes == null) return; // user cancelled: do nothing
+    if (bytes == null) return;
 
     _showLoading('Classifying…');
-    // Let the dialog draw before the model blocks the UI thread.
     await Future.delayed(const Duration(milliseconds: 100));
 
     try {
@@ -51,7 +45,7 @@ class _MainShellState extends State<MainShell> {
       setState(() => _history.insert(0, entry));
 
       if (!mounted) return;
-      Navigator.of(context).pop(); // close loading dialog
+      Navigator.of(context).pop();
       openResult(entry);
     } on FormatException catch (e) {
       if (!mounted) return;
@@ -69,8 +63,6 @@ class _MainShellState extends State<MainShell> {
       MaterialPageRoute(builder: (_) => ResultScreen(entry: entry)),
     );
   }
-
-  // ---------------- The three sources
 
   Future<void> _takePhoto() async {
     try {
@@ -105,7 +97,7 @@ class _MainShellState extends State<MainShell> {
       return;
     }
     if (!mounted) return;
-    Navigator.of(context).pop(); // close "Downloading…"
+    Navigator.of(context).pop();
     await handleImage(bytes, 'Download');
   }
 
@@ -138,8 +130,6 @@ class _MainShellState extends State<MainShell> {
     );
   }
 
-  // ---------------- Small helpers
-
   void _showLoading(String text) {
     showDialog(
       context: context,
@@ -162,8 +152,6 @@ class _MainShellState extends State<MainShell> {
       SnackBar(content: Text(message), behavior: SnackBarBehavior.floating),
     );
   }
-
-  // ---------------- Build
 
   @override
   Widget build(BuildContext context) {

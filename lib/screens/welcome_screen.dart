@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../services/classifier.dart';
 import '../theme/app_theme.dart';
 
-/// Screen 1. Also the loading screen while the model loads.
 class WelcomeScreen extends StatelessWidget {
   const WelcomeScreen({
     super.key,
@@ -12,7 +11,7 @@ class WelcomeScreen extends StatelessWidget {
     required this.onStart,
   });
 
-  final Classifier? classifier; // null while loading
+  final Classifier? classifier;
   final String? error;
   final VoidCallback onStart;
 
@@ -28,10 +27,12 @@ class WelcomeScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               const SizedBox(height: 40),
-              Icon(Icons.center_focus_strong, size: 72, color: theme.colorScheme.primary),
+              Icon(Icons.center_focus_strong,
+                  size: 72, color: theme.colorScheme.primary),
               const SizedBox(height: AppTheme.spacing),
               Text('TM Classifier',
-                  textAlign: TextAlign.center, style: theme.textTheme.headlineMedium),
+                  textAlign: TextAlign.center,
+                  style: theme.textTheme.headlineMedium),
               const SizedBox(height: 8),
               Text(
                 'Point your phone at an object and it tells you what it is, '
@@ -51,7 +52,6 @@ class WelcomeScreen extends StatelessWidget {
   Widget _buildBottom(BuildContext context) {
     final theme = Theme.of(context);
 
-    // Error state
     if (error != null) {
       return Card(
         color: theme.colorScheme.errorContainer,
@@ -69,7 +69,6 @@ class WelcomeScreen extends StatelessWidget {
       );
     }
 
-    // Loading state
     if (classifier == null) {
       return Column(
         children: [
@@ -80,7 +79,6 @@ class WelcomeScreen extends StatelessWidget {
       );
     }
 
-    // Ready state: show the classes as chips and the button
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [

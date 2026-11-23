@@ -4,7 +4,6 @@ import '../services/history_entry.dart';
 import '../theme/app_theme.dart';
 import '../widgets/prediction_row.dart';
 
-/// Screen 3. Same widget for camera, gallery and download.
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key, required this.entry});
 
@@ -29,10 +28,8 @@ class ResultScreen extends StatelessWidget {
         ],
       ),
       body: ListView(
-        // ListView scrolls when the labels do not fit
         padding: const EdgeInsets.all(AppTheme.spacing),
         children: [
-          // 1. Image in the centre, uncropped, at most ~half the screen
           Center(
             child: ConstrainedBox(
               constraints: BoxConstraints(maxHeight: halfScreen),
@@ -45,7 +42,6 @@ class ResultScreen extends StatelessWidget {
           const SizedBox(height: AppTheme.spacing * 1.5),
           Text('Predictions', style: theme.textTheme.titleLarge),
           const SizedBox(height: 8),
-          // 2 + 3. One row per label, already sorted, top row emphasised
           for (var i = 0; i < entry.predictions.length; i++)
             PredictionRow(prediction: entry.predictions[i], isTop: i == 0),
         ],

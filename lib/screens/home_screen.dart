@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import '../services/history_entry.dart';
 import '../theme/app_theme.dart';
 
-/// Screen 2. Three actions and the most recent result.
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
@@ -27,7 +26,8 @@ class HomeScreen extends StatelessWidget {
     return ListView(
       padding: const EdgeInsets.all(AppTheme.spacing),
       children: [
-        Text('What do you want to check?', style: theme.textTheme.headlineMedium),
+        Text('What do you want to check?',
+            style: theme.textTheme.headlineMedium),
         const SizedBox(height: AppTheme.spacing * 1.5),
         _ActionCard(
           icon: Icons.photo_camera_outlined,
@@ -67,7 +67,8 @@ class HomeScreen extends StatelessWidget {
               onTap: () => onOpenLatest(latest!),
               leading: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.memory(latest!.bytes, width: 48, height: 48, fit: BoxFit.cover),
+                child: Image.memory(latest!.bytes,
+                    width: 48, height: 48, fit: BoxFit.cover),
               ),
               title: Text(latest!.top.label),
               subtitle: Text(
@@ -98,7 +99,7 @@ class _ActionCard extends StatelessWidget {
     final theme = Theme.of(context);
 
     return Card(
-      clipBehavior: Clip.antiAlias, // so the ripple (pressed state) stays rounded
+      clipBehavior: Clip.antiAlias,
       child: InkWell(
         onTap: onTap,
         child: Padding(

@@ -3,8 +3,6 @@ import 'package:flutter/material.dart';
 import '../services/classifier.dart';
 import '../theme/app_theme.dart';
 
-/// Screen 5. Information about the model and the design credit.
-/// Labels come from the already-loaded classifier (not read from the file again).
 class ModelScreen extends StatelessWidget {
   const ModelScreen({super.key, required this.classifier});
 
@@ -23,7 +21,8 @@ class ModelScreen extends StatelessWidget {
         Card(
           child: Column(
             children: [
-              _infoTile(Icons.insert_drive_file_outlined, 'Model file', fileName),
+              _infoTile(
+                  Icons.insert_drive_file_outlined, 'Model file', fileName),
               _infoTile(Icons.category_outlined, 'Number of classes',
                   '${classifier.labels.length}'),
               _infoTile(Icons.photo_size_select_large, 'Input size',
@@ -55,10 +54,12 @@ class ModelScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(DesignCredit.name, style: theme.textTheme.titleMedium),
-                Text('by ${DesignCredit.author}', style: theme.textTheme.bodyMedium),
+                Text('by ${DesignCredit.author}',
+                    style: theme.textTheme.bodyMedium),
                 const SizedBox(height: 4),
                 Text(DesignCredit.link, style: theme.textTheme.bodyMedium),
-                Text('Licence: ${DesignCredit.license}', style: theme.textTheme.bodyMedium),
+                Text('Licence: ${DesignCredit.license}',
+                    style: theme.textTheme.bodyMedium),
               ],
             ),
           ),

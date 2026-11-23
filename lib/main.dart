@@ -11,7 +11,6 @@ void main() {
   runApp(const TmApp());
 }
 
-/// Loads the classifier ONCE (T11) and passes the same instance down.
 class TmApp extends StatefulWidget {
   const TmApp({super.key});
 
@@ -35,7 +34,6 @@ class _TmAppState extends State<TmApp> {
       setState(() => _classifier = classifier);
       if (kDebugMode) await _smokeTest(classifier);
     } catch (e) {
-      // T12: show what is missing and where it was expected.
       setState(() {
         _error = 'Could not load the model.\n\n'
             'Expected files:\n'
@@ -47,7 +45,6 @@ class _TmAppState extends State<TmApp> {
     }
   }
 
-  /// T10: classify assets/model/sample.jpg and print every label.
   Future<void> _smokeTest(Classifier classifier) async {
     try {
       final data = await rootBundle.load('assets/model/sample.jpg');
@@ -65,7 +62,7 @@ class _TmAppState extends State<TmApp> {
 
   @override
   void dispose() {
-    _classifier?.close(); // T11: close when the app shuts down
+    _classifier?.close();
     super.dispose();
   }
 
